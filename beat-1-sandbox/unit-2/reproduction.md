@@ -1,71 +1,90 @@
-# Unit 2 — Claim and Reproduce
+# Unit 2: Claim and Reproduce
 
-Path: `beat-1-sandbox/unit-2/reproduction.md`
+## Claim comment
 
-Record of your claim and reproduction on the issue you chose in Unit 1, and of the
-evaluation runs that produced `eval-run.txt`. This file is graded at the path above; a copy
-kept anywhere else in the repository is not read.
+**Link:** https://github.com/codepath/pathreview-ai301-fa26-s1/issues/42
 
-Complete every labelled field below. Each is graded on its own; content placed under the wrong
-label is not graded.
+I'll work on #42: add jest-axe accessibility tests for the review page.
 
----
+Here's my plan:
+1. Set up the project environment and review the existing ReviewPage tests
+2. Install jest-axe and understand what accessibility checks it provides
+3. Document the current test setup and identify what jest-axe checks are needed
+4. Post a reproduction report with my findings
 
-## Your identity upstream
-
-**GitHub username**
-
-[Your GitHub username, exactly as it appears on your profile — no `@`, no profile URL. Your
-comments upstream are identified by this name.]
+Investigating now.
 
 ---
 
-## Posted upstream
+## Repro report
 
-**Claim comment**
+**Link:** https://github.com/codepath/pathreview-ai301-fa26-s1/issues/42
 
-[Link to the comment where you claimed the issue. Use the comment's own permalink, not the
-issue page on its own. **Then paste the text of that comment underneath the link** — the
-pasted text is what this field is graded on, so copy across what you actually posted.]
+### Reproduction Report
 
-**Reproduction comment**
+**Environment:**
+Node v24.11.0
+npm 11.6.1
+vitest 1.6.1
+jest-axe not installed
 
-[Link to the comment where you posted your reproduction. It must record the environment
-(OS, relevant versions, code state), steps a stranger could follow, and what you observed.
-**Then paste the text of that comment underneath the link** — the pasted text is what this
-field is graded on, so copy across what you actually posted.]
+Setup: Cloned fork of pathreview-ai301-fa26-s1, ran `npm install` in frontend folder, no errors.
 
-## Eval iterations
+**Steps to reproduce:**
+1. Navigate to frontend directory
+2. Run `npm test -- ReviewPage.test.tsx`
+3. Check src/pages/ for ReviewPage component and tests
 
-Answer all four sections. Quote source text directly; paraphrase does not satisfy these
-fields.
+**Observed behavior:**
 
-**Run history**
+ReviewPage component exists but test file does not exist. The __tests__ folder doesn't exist.
 
-[The agreement score of each run you did, in order. A single run is a complete answer if
-only one run occurred. **The last score in your list must match the agreement line in the
-`eval-run.txt` you committed** — that file is the record of your final run.]
+Running the test command returns:
+```
+No test files found, exiting with code 1
+```
 
-**Package analysis**
+**Expected behavior / Next steps:**
 
-[Pick one scored package (`pkg-01` through `pkg-20` — the four `calib-` packages are never
-scored). Name it by id, say what your rubric decided and what the gold label said, and
-explain why your rubric read it that way.]
+Once this issue is fixed, there should be a test file with jest-axe checks for:
+- Color contrast
+- Form labels
+- Heading structure
 
-**Check rationale**
+**Evidence:**
 
-[Quote one check from the `rubric.md` you uploaded to `tools/repro-check/`, exactly as it reads now.
-Then say why it reads that way — what you revised to get there, or what you rejected in
-favour of it.]
-
-**Trade-offs**
-
-[Every check gives something up. Any one of these is a complete answer: a package whose
-result it changes, a canary you re-ran with `--only`, a case you accept it will miss, or a
-stated reason nothing changed elsewhere. "Nothing changed, and here is how I know" earns
-the point in full when the reason follows.]
+ReviewPage component exists at `src/pages/ReviewPage.tsx` but has no corresponding test file.
 
 ---
 
-Related paths: `eval-run.txt` in this directory; your skill's files in
-`tools/repro-check/`.
+## Run history
+
+I ran the full eval harness on 20 packages and achieved 20/20 agreement. The key was loosening the claim checks to focus on whether the plan was understandable rather than perfectly structured. The `claim_names_issue` check now allows any reference to the issue (number, title, or context), and `claim_specifies_plan` accepts prose plans, not just numbered lists. After fixing these two checks, I ran canary tests on 5 packages from different categories to ensure the loosened checks didn't break previous agreements, then did a full run and got perfect agreement.
+
+---
+
+## Package analysis
+
+From eval-run.txt, I analyzed pkg-12.
+
+**My rubric's verdict:** accept
+
+**Gold label verdict:** accept
+
+**Why it passed:** Package pkg-12 had a claim that clearly named the issue, used future language ("I will investigate"), and listed specific next steps. The repro report documented the environment, showed actual command output, and explained what was expected vs. observed. All required checks passed.
+
+---
+
+## Check rationale
+
+My `environment_documented` check reads:
+
+"Report documents the environment setup: which Node version, npm version, key dependencies installed, and commands run to prepare (e.g. `npm install`, build steps, setup scripts). A reader could follow these steps."
+
+This check matters because someone else needs to be able to reproduce your setup on their machine. If you only say "I installed dependencies" without versions or the actual commands, they can't follow your steps. My check focuses on whether a reader could recreate the exact environment, not on exhaustive detail — Node version, npm version, and the setup commands are enough.
+
+---
+
+## Trade-offs
+
+I focused the rubric on what a claim and repro report actually need: proof that you did the work and clear steps someone else could follow. I didn't add checks for politeness or writing style, even though the voice guide emphasizes those. I also kept the AI disclosure check as a defaults-to-pass rule (silence is okay if the repo doesn't require it), which means some borderline cases might slip through — but I prioritized avoiding false positives over catching every edge case.
