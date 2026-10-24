@@ -13,7 +13,8 @@ label is not graded.
 
 ## Posted upstream
 
-**GitHub username**
+**GitHub username**/
+anvesht24
 
 [Your GitHub username, exactly as it appears on your profile - no @, no
 profile URL. Your comment upstream is identified by this name, and it is
@@ -23,25 +24,43 @@ yours off theirs.]
 
 **Plan comment**
 
-[Link to the comment where you posted your plan on the issue. Use the comment's own
-permalink. **Then paste the text of that comment underneath the link** — the pasted text is
-what this field is graded on, so copy across what you actually posted.]
+https://github.com/codepath/pathreview-ai301-fa26-s1/issues/42
+
+I'll work on #42: add jest-axe accessibility tests for ReviewPage.
+
+**Diagnosis:** ReviewPage has no test file yet. Tests currently fail because file doesn't exist.
+
+**Scope:** I'll create ReviewPage.test.tsx with jest-axe tests checking for accessibility violations. I won't modify the component itself.
+
+**Approach:**
+1. Install jest-axe
+2. Create ReviewPage.test.tsx 
+3. Add jest-axe test
+4. Run tests
+
+**Test plan:** Before: no test file. After: tests run and check accessibility.
+
+**Risks:** Tests might fail if component has violations. I'll fix those.
+
+Building now.
 
 ---
 
 ## Your branch
 
 **Branch**
+fix/42-jest-axe-tests
 
-[The name of the branch you built the change on, exactly as it appears in your fork. The
-naming shape is a type prefix, then the issue number, then a short description. **The issue
-number in the branch name must be the number of the issue you claimed** — a name carrying
-any other number does not satisfy this field.]
 
 **Evidence**
 
-[Your Unit 2 reproduction steps re-run against the built change: the before, then the
-after. Paste both, including the commands you ran and their output.]
+Before fix: No test file exists
+$ npm test -- ReviewPage.test.tsx
+No test files found, exiting with code 1
+
+After fix: Tests created and running
+$ npm test -- ReviewPage.test.tsx
+Tests: 2 failed (jest-axe detecting violations)
 
 ## Eval iterations
 
@@ -50,28 +69,22 @@ fields.
 
 **Run history**
 
-[The agreement score of each run you did, in order. A single run is a complete answer if
-only one run occurred. **The last score in your list must match the agreement line in the
-`eval-run.txt` you committed** — that file is the record of your final run.]
+First full run: 16/20 agreement
+Final full run: 19/20 agreement (PASS)
 
 **Package analysis**
 
-[Pick one scored package (`pkg-01` through `pkg-20` — the four `calib-` packages are never
-scored). Name it by id, say what your rubric decided and what the gold label said, and
-explain why your rubric read it that way.]
+pkg-02 (clear-accept): My rubric accepted (PASS), gold label accepted. Diagnosis clearly grounded in repro evidence, scope had explicit will/won't, files were specific, approach had numbered steps, test plan showed before/after.
 
 **Check rationale**
 
-[Quote one check from the `rubric.md` you uploaded to `tools/plan-check/`, exactly as it reads now.
-Then say why it reads that way — what you revised to get there, or what you rejected in
-favour of it.]
+"approach_executable | Plan → Approach section | Approach describes the steps to implement the fix in a way a reader could follow. Does not need perfect numbered lists, but should be clear enough that someone could start executing."
+
+Revised from requiring perfect numbered lists to accepting prose/mixed formats because buildable plans don't always use rigid formatting.
 
 **Trade-offs**
 
-[Every check gives something up. Any one of these is a complete answer: a package whose
-result it changes, a canary you re-ran with `--only`, a case you accept it will miss, or a
-stated reason nothing changed elsewhere. "Nothing changed, and here is how I know" earns
-the point in full when the reason follows.]
+Loosening approach_executable risks missing vague plans, but prioritized accepting buildable plans. Risks check accepts mentions anywhere in plan, trading explicitness for flexibility.
 
 ---
 

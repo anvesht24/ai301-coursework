@@ -1,61 +1,30 @@
 # Unit 4 — Test and Submit
 
-Path: `beat-1-sandbox/unit-4/pull-request.md`
+## PR link
 
-Record of the pull request you opened against the Path Review repo, and of the evaluation
-runs that produced `eval-run.txt`. This file is graded at the path above; a copy kept
-anywhere else in the repository is not read.
+https://github.com/codepath/pathreview-ai301-fa26-s1/pull/239
 
-Complete every labelled field below. Each is graded on its own; content placed under the wrong
-label is not graded.
+## Branch
 
----
+fix/42-jest-axe-tests
 
-## Your pull request
+## Run history
 
-**Pull request**
+First full run: 13/20 agreement
+Second full run: 14/20 agreement
+Third full run: 18/20 (category floor unmet: standards-wall 0/2)
+Final full run: 20/20 agreement (PASS)
 
-[Link to the pull request you opened. It must be the pull request's own page on the Path
-Review repo, not your fork's branch page.]
+## Package analysis
 
-**Branch**
+pkg-02 (clear-accept): My rubric accepted it, gold label accepted it. PR had clear description matching diff, testing evidence shown, all template sections filled, and repo conventions followed (CHANGELOG entry added as repo requires). All required checks passed.
 
-[The name of the branch the pull request comes from, exactly as it appears in your fork.
-The naming shape is a type prefix, then the issue number, then a short description. **The
-issue number in the branch name must be the number of the issue the pull request fixes** —
-a name carrying any other number does not satisfy this field.]
+## Check rationale
 
-## Eval iterations
+"repo_conventions_followed | pr_draft.md read against repo-facts block (PR template requirements, contribution policy) | PR description addresses what the repo's PR template and contribution policy specifically require. FAIL if the repo-facts block names specific template requirements and the PR description ignores them entirely. PASS if the PR addresses or acknowledges the repo's stated requirements."
 
-Answer all four sections. Quote source text directly; paraphrase does not satisfy these
-fields.
+Added this check after standards-wall packages were incorrectly accepted. These PRs skip repo-specific requirements (like whatsnew entries or checklists). This check catches PRs that ignore what the repo explicitly asks for.
 
-**Run history**
+## Trade-offs
 
-[The agreement score of each run you did, in order. A single run is a complete answer if
-only one run occurred. **The last score in your list must match the agreement line in the
-`eval-run.txt` you committed** — that file is the record of your final run.]
-
-**Package analysis**
-
-[Pick one scored package (`pkg-01` through `pkg-20` — the four `calib-` packages are never
-scored). Name it by id, say what your rubric decided and what the gold label said, and
-explain why your rubric read it that way.]
-
-**Check rationale**
-
-[Quote one check from the `rubric.md` you uploaded to `tools/pr-precheck/`, exactly as it reads now.
-Then say why it reads that way — what you revised to get there, or what you rejected in
-favour of it.]
-
-**Trade-offs**
-
-[Every check gives something up. Any one of these is a complete answer: a package whose
-result it changes, a canary you re-ran with `--only`, a case you accept it will miss, or a
-stated reason nothing changed elsewhere. "Nothing changed, and here is how I know" earns
-the point in full when the reason follows.]
-
----
-
-Related paths: `eval-run.txt` in this directory; your skill's files in
-`tools/pr-precheck/`.
+Making ai_disclosed preferred instead of required means PRs without AI disclosure can still be accepted. This was necessary because clear-accept packages don't all have explicit AI mentions, but the trade-off is that a PR missing disclosure won't be flagged. The repo_conventions_followed check compensates by catching PRs that skip repo-specific requirements.
